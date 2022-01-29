@@ -1,5 +1,5 @@
 {-
-    The Glasgow Haskell Compiler
+                                    The Glasgow Haskell Compiler
 
     - A compiler translates code into lower level languages where a machine can run it directly 
     - A translater/interpreter runs the code directly
@@ -13,7 +13,7 @@
 -}
 
 {-
-    The Standard Prelude 
+                                        The Standard Prelude 
 
     - Haskell comes with a large number of standard library functions.
     - In addition to the familiar numeric funcitons such as + * / - there are many more for lists
@@ -51,7 +51,7 @@
 -}
 
 {-
-    Function Application
+                                        Function Application
 
     - in mathematics function applicaiton is denoted using parentheses
     - multiplication is often denoted using spaces or juxtiposition
@@ -76,7 +76,7 @@
 -}
 
 {-
-    Haskell Scripts 
+                                        Haskell Scripts 
 
     - new functions are defined within a script 
     - a script is a text file comprising a sequence of definitions 
@@ -86,7 +86,7 @@
 -}
 
 {-
-    Useful GHCi Commands
+                                    Useful GHCi Commands
 
     - all can be abbreviated to their first letter
 
@@ -102,7 +102,7 @@
 -}
 
 {-
-    Naming Requirements
+                                    Naming Requirements
 
     - function and argument names must begin with a lower-case letter
         - myFun fun1 arg_2 x'
@@ -112,7 +112,7 @@
 -}
 
 {-
-    The Layout Rule
+                                    The Layout Rule
 
     - in a sequence of definitions each definition must begin in precisely the same column
     GOOD            BAD       

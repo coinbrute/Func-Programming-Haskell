@@ -1,22 +1,23 @@
 {-
     The Glasgow Haskell Compiler
 
-    A compiler translates code into lower level language where a machine cna run it directly 
-    A translater/interpreter runs the code directly
+    - A compiler translates code into lower level languages where a machine can run it directly 
+    - A translater/interpreter runs the code directly
 
-    GHC is the leading implementation of Haskell
-    comprised of compiler and interpreter
+    - GHC is the leading implementation of Haskell
+    - comprised of compiler and interpreter
 
-    Start by opening terminal/cmd and typing 'ghci'
+    - Start by opening terminal/cmd and typing 'ghci'
 
-    can be used as simple expression evaluator in terminal 
+    - can be used as simple expression evaluator in terminal 
 -}
 
 {-
     The Standard Prelude 
 
-    - Haskell comes with a large number of standard library funciton.
-    - In addition to the familiar numeric funcitons such as + * there are manu for lists
+    - Haskell comes with a large number of standard library functions.
+    - In addition to the familiar numeric funcitons such as + * / - there are many more for lists
+                    SOME COMMON LIST FUNCTIONS
     - select first element of a list
         head [1,2,3,4,5]
         1
@@ -53,18 +54,18 @@
     Function Application
 
     - in mathematics function applicaiton is denoted using parentheses
-    - multiplication is often denoted using spaces
+    - multiplication is often denoted using spaces or juxtiposition
         f(a,b) + c d
 
     - in haskell function application is denoted using spaces 
     - multiplication is denoted using *
-        f a b + c*d
+        f a b + c * d
     
     - function application is assumed to have higher priority than all other operators
         f a + b
-        - means (f a) + b, rather than f(a + b)
-        - haskell chooses (f a) + b
-    
+        - the above syntax means (f a) + b, rather than f(a + b)
+        - this means that the haskell compiler will read it as (f a) + b
+                            COMPARISONS
                     Math            Haskell
                     f(x)            f x
                     f(x,y)          f x y
@@ -81,13 +82,13 @@
     - a script is a text file comprising a sequence of definitions 
     - by convention haskell scripts have a .hs suffix on their filename 
     
-    Heading over to test.hs for my Exercise 1. 
+    Head over to test.hs for Exercise 1. 
 -}
 
 {-
     Useful GHCi Commands
 
-    - all can be abbreviated to first letter
+    - all can be abbreviated to their first letter
 
     Command             Meaning
     :load name          load script name

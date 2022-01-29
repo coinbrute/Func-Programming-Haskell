@@ -4,7 +4,9 @@
     - two of the fundemental ideas in Haskell
     - a type is a name for a collection of related values 
         - for example, in Haskell the basic type Bool contains the two logical values True and False
-    
+-}
+
+{-
                                     Type Errors
     
     - Applying a function to one or more arguments of the wrong type is called a type error
@@ -12,6 +14,9 @@
         > error ...
     - 1 is a number and False is a logical value, but + requires two numbers
 
+-}
+
+{-
                                     Types in Haskell
     
     - if evaluating an expression e would produce a value of type t, then e has type t, written 
@@ -26,7 +31,9 @@
         True
         > :type not False
         not False :: Bool
+-}
 
+{-
                                     Basic Types
     - Haskell has a number of basic types
     - Bool -> logical values
@@ -34,7 +41,9 @@
     - String - string of characters in double quotes ""
     - Int - integer 64 bit numbers 
     - Float - floating- point numbers 
+-}
 
+{-
                                     List Types
     - a list is a sequence of values of the same type
         [False, True, False] :: [Bool]
@@ -45,7 +54,12 @@
     - the type of the elements is unrestricted 
         - we can have lists of lists, lists of tuples etc.
         [['a'], ['b','c']] :: [[Char]]
+-}
+listOfBools    = [False, True, False] :: [Bool]
+listOfChars    = ['a','b','c','d'] :: [Char]
+nestedCharList = [['a'], ['b','c']] :: [[Char]]
 
+{-
                                     Tuple Types
     - A tuple is a sequence of values of different types
         (False, True) :: (Bool, Bool)
@@ -57,7 +71,12 @@
     - the type of the components is unrestricted
         ('a', (False, 'b')) :: (Char, (Bool, Char))
         (True, ['a','b']) :: (Bool, [Char])
-    
+-}
+boolTuple       = (False, True) :: (Bool, Bool)
+multiTypeTuple  = (False, 'a', True) :: (Bool, Char, Bool)
+tupleOfTuple    = ('a', (False, 'b')) :: (Char, (Bool, Char))
+tupleOfList     = (True, ['a','b']) :: (Bool, [Char])
+{-    
                                     Function Types
     - a function is a mapping from values of one tpye to values of another type
         not :: Bool -> Bool
@@ -72,7 +91,14 @@
 
         zeroto :: Int -> [Int]
         zeroto n = [0..n]
+-}
+add :: (Int, Int) -> Int
+add (x, y) = x + y
 
+zeroto :: Int -> [Int]
+zeroto n = [0..n]
+
+{-
                                     Curried Functions
     - Functions with multiple arguments are also possible by returning funcitons as results
         add' :: Int -> (Int -> Int)
@@ -96,7 +122,20 @@
         add' 1 :: Int -> Int
         take 5 :: [Int] -> [Int]
         drop 5 :: [Int] -> [Int]
+-}
+add' :: Int -> (Int -> Int)
+add' x y = x + y
 
+add'' :: (Int, Int) -> Int
+add'' (x, y) = x + y
+
+add''' :: Int -> (Int -> Int)
+add''' x y = x + y
+
+mult :: Int -> (Int -> (Int -> Int))
+mult x y z = x*y*x
+
+{-
                                     Currying conventions
     - to avoid excess parentheses when using curried functions follow tow simple conventions 
     - the arrow -> associates to the right
@@ -106,8 +145,9 @@
         mult x y z
         - means ((mult x)y)z
     - unless tupling is explicitly required all function sin Haskell are normally defined in curried form
+-}
 
-    
+{-   
                                     Polymorphic Functions
     - a function is called polymorphic ("of many forms") if its type contains one or more type variables 
         length :: [a] -> Int
@@ -124,7 +164,9 @@
         take :: Int -> [a] -> [a]
         zip :: [a] -> [b] -> [(a,b)]
         id :: a -> a
-    
+-}
+
+{-   
                                     Overloaded Function
     - a polymorphic funciton is called overloaded if its type contains one or more class constraints 
         (+) :: Num a => a -> a -> a
@@ -159,20 +201,20 @@
     ([False,True],['0','1']) :: ([Bool], [Char])
     [tail,init,reverse] :: [[a] -> [a]]
 -}
-    charList :: [Char]
-    charList = ['a', 'b', 'c']
+charList :: [Char]
+charList = ['a', 'b', 'c']
 
-    tuple :: (Char, Char, Char)
-    tuple = ('a', 'b', 'c') 
+tuple :: (Char, Char, Char)
+tuple = ('a', 'b', 'c') 
 
-    listOfTuples :: [(Bool, Char)]
-    listOfTuples = [(False, '0'), (True, '1')]
+listOfTuples :: [(Bool, Char)]
+listOfTuples = [(False, '0'), (True, '1')]
 
-    tupleOfLists :: ([Bool], [Char])
-    tupleOfLists = ([False, True], ['0', '1'])
+tupleOfLists :: ([Bool], [Char])
+tupleOfLists = ([False, True], ['0', '1'])
 
-    listOfFuncs :: [[a] -> [a]]
-    listOfFuncs = [tail, init, reverse]
+listOfFuncs :: [[a] -> [a]]
+listOfFuncs = [tail, init, reverse]
 
 {-
     Exercise 2 - Define the types of the following functions
@@ -193,20 +235,20 @@
 
 -- Exercise 3 verify using GHCi with some tests
 
-    second :: [a] -> a
-    second xs = head (tail xs)
+second :: [a] -> a
+second xs = head (tail xs)
 
-    swap :: (a,b) -> (b,a)
-    swap (x,y) = (y,x)
+swap :: (a,b) -> (b,a)
+swap (x,y) = (y,x)
 
-    pair :: a -> b -> (a,b)
-    pair x y = (x,y)
+pair :: a -> b -> (a,b)
+pair x y = (x,y)
 
-    double :: Num a => a -> a
-    double x = x*2
+double :: Num a => a -> a
+double x = x*2
 
-    palindrome :: Eq a => [a] -> Bool
-    palindrome xs = reverse xs == xs
+palindrome :: Eq a => [a] -> Bool
+palindrome xs = reverse xs == xs
 
-    twice :: (a -> a) -> a -> a
-    twice f x = f (f x)
+twice :: (a -> a) -> a -> a
+twice f x = f (f x)

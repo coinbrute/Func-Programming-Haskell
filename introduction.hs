@@ -33,6 +33,7 @@
                 - apply sum function to output of list building function of 1 through 10
 
 -}
+sum1To10 = sum [1..10]
 
 {-
 
@@ -136,6 +137,13 @@
     - both lists must be the same type
     - whatever is passed in must be of Ord Data type
 -}
+
+f :: Ord a => [a] -> [a]
+f [] = []
+f (x:xs) = f ys ++ [x] ++ f zs
+    where
+        ys = [a | a <- xs, a <= x]
+        zs = [b | b <- xs, b > x]
 
 qsort :: Ord a => [a] -> [a]
 qsort [] = []

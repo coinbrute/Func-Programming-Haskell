@@ -49,6 +49,17 @@
         reverse [1,2,3,4,5]
         [5,4,3,2,1]
 -}
+list = [1..5]
+head1To5 = head list
+tail1To5 = tail list
+getIndexN1To5 = list !! 2
+takeNfrom1To5 = take 3 list
+removeNfrom1To5 = drop 3 list
+getLengthOfList = length list
+sumList = sum list
+getProductOfList = product list
+appendLists = list ++ [6..10]
+reverseAList = reverse list
 
 {-
                                         Function Application
@@ -149,6 +160,7 @@ n = a `div` length xs
     Show how the library function 'last' that selects the last element of a list can be defined 
     using the functions introduced in this lecture
 -}
+last' :: [a] -> a
 last' xs = head (reverse xs)
 
 {-
@@ -156,6 +168,7 @@ last' xs = head (reverse xs)
 
     Think of another possible definition for 'last'
 -}
+last'' :: [a] -> a
 last'' xs = xs !! (length xs - 1)
 
 {-
@@ -164,6 +177,8 @@ last'' xs = xs !! (length xs - 1)
     Define init using functions introduced in this lecture two different ways
     - init removes the last element from a list
 -}
+init' :: [a] -> [a]
 init' xs = take (length xs - 1) xs
 
+init'' :: [a] -> [a]
 init'' xs = reverse (tail (reverse xs))

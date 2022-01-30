@@ -207,10 +207,14 @@ qsort (x:xs) =
     - Without looking at prelude define the followign library functions using recursion:
 -}
 -- Decide if all logical values in a list are true:
+-- and' :: [Bool] -> Bool
+-- and' [] = True
+-- and' (False:_) = False
+-- and' (_:xs) = and' xs
 and' :: [Bool] -> Bool
-and' [] = True
-and' (False:_) = False
-and' (_:xs) = and' xs
+and' []     = True
+and' (b:bs) = b && and' bs
+
 
 {-
     Walkthrough
@@ -224,7 +228,7 @@ and' (_:xs) = and' xs
 -- Concatenate a list of lists:
 concat' :: [[a]] -> [a]
 concat' [] = []
-concat' (x:xs) = x ++ concat' xs
+concat' (xs:xss) = xs ++ concat' xss
 
 {-
     Walkthrough
@@ -237,7 +241,7 @@ concat' (x:xs) = x ++ concat' xs
 
 -- Produce a list with n identical elements:
 replicate' :: Int -> a -> [a]
-replicate' 0 _ = []
+replicate' 0 x = []
 replicate' n x = x : replicate' (n-1) x
 
 {-
@@ -253,8 +257,12 @@ replicate' n x = x : replicate' (n-1) x
 
 -- Select the nth element of a list:
 (!!!) :: [a] -> Int -> a
-(x:_) !!! 0 = x
+(x:_)  !!! 0 = x -- non empty list requesting index zero. give back x 
 (_:xs) !!! n = xs !!! (n-1)
+-- any other non empty list with non zero 
+-- index in at position n-1
+-- call function again at remainder of list
+-- continue calling until one value remains
 
 {-
     Walkthrough
@@ -265,9 +273,12 @@ replicate' n x = x : replicate' (n-1) x
 -}
 
 -- Decide if a value is an element of a list:
+-- elem' :: Eq a => a -> [a] -> Bool
+-- elem' v []     = False 
+-- elem' v (x:xs) = if v == x then True else elem' v xs
 elem' :: Eq a => a -> [a] -> Bool
-elem' v []     = False 
-elem' v (x:xs) = if v == x then True else elem' v xs
+elem' x []     = False
+elem' x (y:ys) = x == y || elem' x ys
 
 {-
     Walkthrough
@@ -280,19 +291,37 @@ elem' v (x:xs) = if v == x then True else elem' v xs
     > True
 -}
 
--- {-
---     Exercise 2:
---     - define a recursive function
---         merge :: Ord a => [a] -> [a] -> [a]
---     - this function should merge two sorted lists of values to give a single sorted list 
---         - For Example: 
---         > merge [2,5,6] [1,3,4]
---         > [1,2,3,4,5,6]
--- -}
+-- Define insert function which inserts value into specified index of sorted list
+insert' :: Int -> [Int] -> [Int]
+insert' x []     = [x]
+insert' x (y:ys) = if x <= y then x : y : ys else y : insert' x ys
+
+-- Define insertion sort function 
+    -- non empty lists are recursivly sorted
+isort' :: [Int] -> [Int]
+isort' []     = []
+isort' (x:xs) = insert' x (isort' xs)
+
+{-
+    Exercise 2:
+    - define a recursive function
+        merge :: Ord a => [a] -> [a] -> [a]
+    - this function should merge two sorted lists of values to give a single sorted list 
+        - For Example: 
+        > merge [2,5,6] [1,3,4]
+        > [1,2,3,4,5,6]
+-}
+-- merge' :: Ord a => [a] -> [a] -> [a]
+-- merge' xs     []     = xs
+-- merge' []     ys     = ys
+-- merge' (x:xs) (y:ys) = if x < y then x : merge' xs (y:ys) else y : merge' (x:xs) ys
 merge' :: Ord a => [a] -> [a] -> [a]
-merge' xs     []     = xs
-merge' []     ys     = ys
-merge' (x:xs) (y:ys) = if x < y then x : merge' xs (y:ys) else y : merge' (x:xs) ys
+merge' [] ys = ys -- if first list is empty just add second list
+merge' xs [] = xs -- if second list is empty just add first list
+merge' (x:xs) (y:ys) = if x < y 
+                       then x : merge' xs (y:ys) 
+                       else y : merge' (x:xs) ys
+
 
 {-
     Walkthrough
@@ -313,6 +342,8 @@ merge' (x:xs) (y:ys) = if x < y then x : merge' xs (y:ys) else y : merge' (x:xs)
     >[1,2,3,4,5,6]
 -}
 
+
+
 -- {-
 --     Exercise 3:
 --     Define a recursive function
@@ -321,7 +352,13 @@ merge' (x:xs) (y:ys) = if x < y then x : merge' xs (y:ys) else y : merge' (x:xs)
 --         - lists of length <= 1 are already sorted
 --         - other lists can be sorted by sorting the two halves and merging the resulting lists
 -- -}
+split' :: [a] -> ([a1],[b])
+split' [] = ([],[])
+split' xs = (take ((length xs) `div` 2) xs, drop ((length xs) `div` 2) xs)
+
+
 msort' :: Ord a => [a] -> [a]
-msort' []     = [] -- return empty lists
-msort' [x] = [x] -- return lists of size one
-msort' (x:xs) = merge' (msort' (take (length xs `div` 2) xs)) (msort' (drop (length xs `div` 2) xs))
+msort' []  = []
+msort' [x] = [x]
+msort' xs  = merge' (msort' ys) (msort' zs)
+             where (ys,zs) = split' xs

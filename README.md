@@ -10,3 +10,4 @@ The notes in this repo will go across both the FP and AFP courses on YouTube.
 3. [types-and-classes.hs](./types-and-classes.hs)
 4. [defining-functions.hs](./defining-functions.hs)
 5. [list-comprehensions.hs](./list-comprehensions.hs)
+6. [recursive-functions.hs](./recursive-functions.hs)

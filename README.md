@@ -9,3 +9,4 @@ The notes in this repo will go across both the FP and AFP courses on YouTube.
 2. [first-steps.hs](./first-steps.hs)
 3. [types-and-classes.hs](./types-and-classes.hs)
 4. [defining-functions.hs](./defining-functions.hs)
+5. [list-comprehensions.hs](./list-comprehensions.hs)

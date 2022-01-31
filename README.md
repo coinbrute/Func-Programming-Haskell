@@ -4,6 +4,8 @@ Thorough and in depth course notes and exercises for the Functional Programming 
 
 The notes in this repo will go across both the FP and AFP courses on YouTube.
 
+Welp...He made the youtube series private...so thats fkn cool
+
 ### Lecture Notes Order
 1. [introduction.hs](./introduction.hs)
 2. [first-steps.hs](./first-steps.hs)
